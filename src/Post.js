@@ -2,20 +2,20 @@ import React from 'react'
 import './Post.css'
 import Avatar from "@material-ui/core/Avatar"
 
-function Post() {
+function Post({ imageUrl, username, caption}) {
     return (
         <div className="post">
         <div className="post__header">
         <Avatar 
             className="post__avatar"
-            alt="Vistrit"
-            src=""
+            alt={username}
+            src="/static/images/avatar/1.jpg"
         />
-            <h3>Username</h3>
+            <h3>{username}</h3>
         </div>
-        
-            <img className="post__image" src="https://m.hindustantimes.com/rf/image_size_1200x900/HT/p2/2020/06/20/Pictures/_3fe51840-b31f-11ea-8315-f58cec6734ed.jpg" alt="" />
-            <h4 className="post__text"><strong>Username: </strong> caption goes rigth here</h4>
+
+            <img className="post__image" src={imageUrl} alt="" />
+            <h4 className="post__text"><strong>{username}: </strong> {caption} </h4>
         </div>
     )
 }
