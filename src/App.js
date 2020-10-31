@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const [modalStyle] = React.useState(getModalStyle);
   const classes = useStyles();
+  const [openSignIn, setOpenSignIn] = useState('');
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState('');
@@ -48,21 +49,13 @@ function App() {
       if (authUser) {
         console.log(authUser)
         setUser(authUser)
-
-        if (authUser.displayName){
-
-        }else{
-          return authUser.updateProfile({
-            displayName: username,
-          });
-        }
-
       }else{
           setUser(null)
-      }
+        }
     })
+
     return () => {
-      unsubscribe
+      unsubscribe();
     }
   },[user, username])
 
@@ -77,7 +70,13 @@ function App() {
 
   const signUp = (event) => {
       event.preventDefault();
-      auth.createUserWithEmailAndPassword(email, password).catch((error) => alert(error.message));
+      auth.createUserWithEmailAndPassword(email, password)
+      .then((authUser)=>{
+          return authUser.user.updateProfile({
+          displayName: username
+        })
+      })
+      .catch((error) => alert(error.message));
   }
 
   return (
@@ -117,7 +116,15 @@ function App() {
       <div className="app__header">
         <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="" />
       </div>
-      <Button onClick={() => setOpen(true)}>Sign Up/In</Button>
+      {user ? (
+        <Button onClick={() => auth.signOut()}>Logout</Button>
+      ):
+      (
+        <div className="app__loginContainer">
+          <Button onClick={() => setOpen(true)}>Sign In</Button>
+          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        </div>
+      )}
 
       {
         posts.map(({id, post} )=> (
