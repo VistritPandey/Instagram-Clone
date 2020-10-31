@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useEffect }  from 'react';
 import './App.css';
 import Post from "./Post"
-import { db } from './firebase'
+import { db, auth } from './firebase'
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button,Input } from "@material-ui/core";
@@ -41,6 +41,18 @@ function App() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log(authUser)
+        setUser(authUser)
+      }else{
+          setUser(null)
+      }
+    })
+  },[])
 
   useEffect(() =>{
       db.collection('posts').onSnapshot(snapshot => {
@@ -51,8 +63,9 @@ function App() {
       })
   },[]);
 
-  const signUp = () => {
-
+  const signUp = (event) => {
+      event.preventDefault();
+      auth.createUserWithEmailAndPassword(email, password).catch((error) => alert(error.message));
   }
 
   return (
