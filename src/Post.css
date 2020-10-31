@@ -5,5 +5,15 @@
 
 .post__text{
     font-weight: normal;
+    padding: 10px;
 }
 
+.post__header{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.post__avatar {
+    margin-right: 10px;
+}
