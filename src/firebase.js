@@ -2,14 +2,15 @@
 import firebase from "firebase";
 
 const firebaseApp = firebase.initializeApp({
-    apiKey: "AIzaSyBQ6IGF_AZmA582zx6qnfsTOivZg43Q-2g",
-    authDomain: "instagram-vistrit.firebaseapp.com",
-    databaseURL: "https://instagram-vistrit.firebaseio.com",
-    projectId: "instagram-vistrit",
-    storageBucket: "instagram-vistrit.appspot.com",
-    messagingSenderId: "420177454301",
-    appId: "1:420177454301:web:bb1ee2dc95924574dc6734",
-    measurementId: "G-6VHZREFRTJ"
+  apiKey: "AIzaSyCQxzaLbmm3yJgbKmqjcBqKv4BYnwF2Yv8",
+  authDomain: "vistrit-insta.firebaseapp.com",
+  databaseURL: "https://vistrit-insta.firebaseio.com",
+  projectId: "vistrit-insta",
+  storageBucket: "vistrit-insta.appspot.com",
+  messagingSenderId: "987746635486",
+  appId: "1:987746635486:web:e8c0970fc431f8bc603c4f",
+  measurementId: "G-TJLQ9QR65F"
+
   });
 
 const storage = firebase.storage();
