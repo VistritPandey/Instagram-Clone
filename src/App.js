@@ -164,7 +164,15 @@ function App() {
           <Button onClick={() => setOpen(true)}>Sign Up</Button>
         </div>
       )}
+
+      
       </div>
+      {user?.displayName? (
+      <ImageUpload username={user.displayName}/>
+    ): (
+      <h3>You need to login first in order to upload the image(Refresh the page if not loading)</h3>
+    )
+    }
           <div className="app__posts">
             {
             posts.map(({id, post} )=> (
@@ -178,14 +186,6 @@ function App() {
             ))
           }
           </div>
-
-      {user?.displayName? (
-      <ImageUpload username={user.displayName}/>
-    ): (
-      <h3>You need to login first in order to upload the image(Refresh the page if not loading)</h3>
-    )
-    }
-      
     </div>
   );
 }
