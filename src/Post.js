@@ -60,6 +60,7 @@ function Post({ postId, user, imageUrl, username, caption}) {
                     ))}
                 </div>
             }
+
             <form className="post__commentBox">
                 <input 
                     className="post__input"
