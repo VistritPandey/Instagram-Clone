@@ -43,5 +43,11 @@
   .post__button{
     flex: 0;
     border: none;
+    color: #6082a3;
+    background-color: transparent;
     border-top: 1px solid lightgray;
+  }
+
+  .post__comment{
+      padding: 10px;
   }

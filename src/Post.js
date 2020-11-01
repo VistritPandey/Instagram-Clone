@@ -3,8 +3,9 @@ import './Post.css'
 import Avatar from "@material-ui/core/Avatar"
 import { useState, useEffect } from 'react'
 import { db } from './firebase'
+import firebase from 'firebase'
 
-function Post({postId, imageUrl, username, caption}) {
+function Post({ postId, user, imageUrl, username, caption}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState('');
 
@@ -15,6 +16,7 @@ function Post({postId, imageUrl, username, caption}) {
             .collection("posts")
             .doc(postId)
             .collection("comments")
+            .orderBy('timestamp','desc')
             .onSnapshot((snapshot) =>{
                 setComments((snapshot.docs.map((doc) => doc.data())))
             });
@@ -26,7 +28,14 @@ function Post({postId, imageUrl, username, caption}) {
     }, [postId]);
 
     const postComment = (event) => {
+        event.preventDefault();
 
+        db.collection("posts").doc(postId).collection("comments").add({
+            text: comment,
+            username: user.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        setComment('');
     }
 
     return (
@@ -42,6 +51,15 @@ function Post({postId, imageUrl, username, caption}) {
 
             <img className="post__image" src={imageUrl} alt="" />
             <h4 className="post__text"><strong>{username}: </strong> {caption} </h4>
+            {
+                <div className="post__comments">
+                    {comments.map((comment) => (
+                        <p>
+                            <b>{comment.username}</b>{comments.text}
+                        </p>
+                    ))}
+                </div>
+            }
             <form className="post__commentBox">
                 <input 
                     className="post__input"
