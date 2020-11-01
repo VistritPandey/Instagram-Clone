@@ -55,7 +55,7 @@ function Post({ postId, user, imageUrl, username, caption}) {
                 <div className="post__comments">
                     {comments.map((comment) => (
                         <p>
-                            <b>{comment.username}</b>{comments.text}
+                            <b>{comment.username}</b>{comment.text}
                         </p>
                     ))}
                 </div>
@@ -66,7 +66,7 @@ function Post({ postId, user, imageUrl, username, caption}) {
                     type="text"
                     placeholder="Add a a comment"
                     value={comment}
-                    onChange={(e) => setComments(e.target.value)}
+                    onChange={(e) => setComment(e.target.value)}
                 />
                 <button
                 disabled={!comment}
