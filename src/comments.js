@@ -1,6 +1,9 @@
 import React from 'react'
 
 function comments() {
+    const [comment, PostComments] = useState([]);
+    const [comment, setComment] = useState('');
+
     return (
         <div>
             <form className="post__commentBox">
