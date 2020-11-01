@@ -93,12 +93,6 @@ function App() {
 
   return (
     <div className="app">
-    {user?.displayName? (
-      <ImageUpload username={user.displayName}/>
-    ): (
-      <h3>You need to login first in order to upload the image</h3>
-    )
-    }
     
     <Modal
         open={open}
@@ -160,8 +154,7 @@ function App() {
 
       <div className="app__header">
         <img className="app__headerImage" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="" />
-      </div>
-      {user ? (
+        {user ? (
         <Button onClick={() => auth.signOut()}>Logout</Button>
       ):
       (
@@ -170,17 +163,26 @@ function App() {
           <Button onClick={() => setOpen(true)}>Sign Up</Button>
         </div>
       )}
+      </div>
+          <div className="app__posts">
+            {
+            posts.map(({id, post} )=> (
+            <Post 
+            key={id}
+            username={post.username}
+            caption={post.caption}
+            imageUrl={post.imageUrl}
+            />
+            ))
+          }
+          </div>
 
-      {
-        posts.map(({id, post} )=> (
-          <Post 
-          key={id}
-          username={post.username}
-          caption={post.caption}
-          imageUrl={post.imageUrl}
-          />
-        ))
-      }
+      {user?.displayName? (
+      <ImageUpload username={user.displayName}/>
+    ): (
+      <h3>You need to login first in order to upload the image(Refresh the page if not loading)</h3>
+    )
+    }
       
     </div>
   );
