@@ -2,6 +2,7 @@
     background-color: white;
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 10px;
     border: 1px solid lightgray;
 }
 
@@ -26,3 +27,21 @@
 .post__avatar {
     margin-right: 10px;
 }
+
+.post__commentBox {
+    display: flex;
+    margin-top: 10px;
+}
+
+.post__input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-top: 1px solid lightgray;
+  }
+  
+  .post__button{
+    flex: 0;
+    border: none;
+    border-top: 1px solid lightgray;
+  }
