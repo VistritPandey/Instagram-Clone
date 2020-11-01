@@ -93,8 +93,12 @@ function App() {
 
   return (
     <div className="app">
-
-    <ImageUpload />
+    {user?.displayName? (
+      <ImageUpload username={user.displayName}/>
+    ): (
+      <h3>You need to login first in order to upload the image</h3>
+    )
+    }
     
     <Modal
         open={open}
@@ -149,7 +153,7 @@ function App() {
               value={password}
               onChange={(e)=> setPassword(e.target.value)}
             />
-            <Button onClick={signIn}>Sign In</Button>
+            <Button onClick={signIn}>Login</Button>
           </form>
         </div>
       </Modal>
@@ -162,7 +166,7 @@ function App() {
       ):
       (
         <div className="app__loginContainer">
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
           <Button onClick={() => setOpen(true)}>Sign Up</Button>
         </div>
       )}
